@@ -13,7 +13,7 @@ function QuizPage() {
 
     console.log(quiz)
 
-    const quizArray =  quiz.map(item => {
+    const quizArray =  quiz?.map(item => {
         return <Questions  
         question={item.question} 
         options={[item.correct_answer, ...item.incorrect_answers]} 
