@@ -1,37 +1,34 @@
-import {useState, useEffect, useRef} from "react"
+import { useState ,useEffect } from "react"
 import Questions from "./Questions"
 
 function QuizPage() {
-
-    const [quiz, setQuiz] = useState(null)
-    const firstload = useRef(true)
+    const [quiz, setQuiz] = useState([])
 
     useEffect(() => {
-        if(firstload.current) {
-            fetch("https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple")
-                .then(res => res.json())
-                .then(data => setQuiz(data.results))
-            firstload.current = false
+        const fetchData = async () => {
+            const response = fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy")
+            const data = (await response).json()
+            setQuiz(data.results)
         }
-
+        fetchData()
     }, [])
 
+    console.log(quiz)
 
-    const quizArray = quiz && quiz.map(item => {
-        const optionsArray = [...item.incorrect_answers, item.correct_answer]
-        return <Questions
-            key={item.question}
-            question={item.question}
-            options={optionsArray}
-        />
-    })
-    return (
-        <div className="quiz-container">
-            {quiz && <form>
-                {quizArray}
-            </form>}
-        </div>
-    )
+    // const quizArray =  quiz.map(item => {
+    //     return <Questions  
+    //     question={item.question} 
+    //     options={[item.correct_answer, ...item.incorrect_answers]} 
+    //     />
+    // })
+
+  return (
+    <div className="quiz-container">
+        <form>
+            {/* {quizArray} */}
+        </form>
+    </div>
+  )
 }
 
 export default QuizPage
