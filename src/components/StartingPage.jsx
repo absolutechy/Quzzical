@@ -1,10 +1,14 @@
-function StartingPage() {
+import "../App.css"
+
+function StartingPage(props) {
+
   return (
-    <div class="container">
+    <>
       <h1>Quizzical</h1>
       <p>Some description if needed</p>
-      <button>Start quiz</button>
-    </div>
+      <button onClick={props.startQuiz}>Start quiz</button>
+    </>
+    
   )
 }
 
