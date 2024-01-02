@@ -71,9 +71,8 @@ form {
 .quiz-container {
   /* background-color: #E0F7FA; */
   height: 100vh;
+  padding-left: 10em;
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   position: relative;   
 }
@@ -114,6 +113,11 @@ form {
   clip: rect(0, 0, 0, 0);
 }
 
+.optionsContainer {
+  display: flex;
+  align-items: center;
+}
+
 .option {
   display: inline-block;
   max-width: 200px; /* Set the maximum width as per your requirement */
@@ -127,6 +131,14 @@ form {
   white-space: nowrap; /* This will prevent the text from breaking into multiple lines */
   overflow: hidden; /* This will hide the text that exceeds the maximum width */
   text-overflow: ellipsis; /* This will add an ellipsis (...) at the end of the overflowing text */
+}
+
+.correct{
+  background-color: green;
+}
+
+.incorrect{
+  background-color: red;
 }
 
 .option-input.radio:checked + .option {

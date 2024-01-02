@@ -5,19 +5,29 @@ import './App.css'
 
 function App() {
     const [quiz, setQuiz] = useState(null)
-    const [start, setStart] = useState(false) // New state variable
+    const [start, setStart] = useState(false) 
+    const [correctAnswers, setCorrectAnswers] = useState([]) 
+    const [selectedAnswers, setSelectedAnswers] = useState([])
+    const [checkAnswer, setCheckAnswer] = useState(false)
 
     useEffect(() => {
         if(start) {
             fetch("https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple")
                 .then(res => res.json())
-                .then(data => setQuiz(data.results))
-            setStart(false) // Reset the start state after fetching the data
+                .then(data => {
+                    setQuiz(data.results)
+                    setCorrectAnswers(data.results.map(item => item.correct_answer)) 
+                })
+            setStart(false) 
         }
-    }, [start]) // Add start to the dependency array
+    }, [start]) 
 
     const startQuiz = () => {
-        setStart(true) // Change the start state to true when the button is clicked
+        setStart(true) 
+    }
+
+    const handleOptionChange = (selectedOption) => {
+        setSelectedAnswers(prevSelectedAnswers => [...prevSelectedAnswers, selectedOption])
     }
 
     const quizArray = quiz && quiz.map(item => {
@@ -26,13 +36,30 @@ function App() {
             key={item.question}
             question={item.question}
             options={optionsArray}
+            correctAnswer={item.correct_answers}
+            handleOptionChange={handleOptionChange}
+            checkAnswer={checkAnswer}
         />
     })
+
+    console.log(correctAnswers) 
+    console.log(selectedAnswers)
+
+    const handleClick = (event) => {
+        event.preventDefault()
+        setCheckAnswer(true)
+    }
+
     return (
         <div className="quiz-container">
-            {quiz ? <form>{quizArray}</form> : <StartingPage startQuiz = {startQuiz}/>}
+            {quiz ? (<form>
+                        {quizArray}
+                        <button onClick={handleClick}>Check Answers</button>
+                    </form> )
+            : 
+            <StartingPage startQuiz = {startQuiz}/>}
         </div>
-    )
+    ) 
 }
 
 export default App

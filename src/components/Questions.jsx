@@ -1,4 +1,5 @@
-import {useId} from "react"
+import {useId, useEffect, useState} from "react"
+import "../App.css"
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -10,7 +11,13 @@ function shuffleArray(array) {
 
 function Questions(props) {
     const id = useId()
-    const answersArray = shuffleArray([...props.options])
+    // const answersArray = shuffleArray([...props.options])
+    const [shuffledAnswers, setShuffledAnswers] = useState([])
+    const [selectedOption, setSelectedOption] = useState(null)
+
+    useEffect(() => {
+        setShuffledAnswers(shuffleArray([...props.options]))
+    }, [])
 
     function decodeHTMLEntities(text) {
       const textArea = document.createElement('textarea');
@@ -18,17 +25,36 @@ function Questions(props) {
       return textArea.value;
     }
 
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value) // Update the selected option when an option is selected
+        props.handleOptionChange(event.target.value) // Pass the selected option back to the parent component
+    }
+
+    const answerOptions = shuffledAnswers.map((answer, index) => (
+        <div key={index}>
+            <input 
+                type="radio" 
+                name={`${id}q`} 
+                className="option-input radio" 
+                id={`${id} + q1${String.fromCharCode(97 + index)}`}
+                value={answer}
+                checked={selectedOption === answer} // Set the checked attribute based on the selected option
+                onChange={handleOptionChange} // Use onChange to update the selected option
+            />
+            <label 
+                htmlFor={`${id} + q1${String.fromCharCode(97 + index)}`} 
+                className={`option ${props.checkAnswer && selectedOption === answer ? (answer === props.correctAnswer ?  'correct' : 'incorrect') : ''}`}
+            >
+                {decodeHTMLEntities(answer)}
+            </label>
+        </div>
+    ))
     return (
         <div id="question1">
             <p className="question">{decodeHTMLEntities(props.question)}</p>
-            <input type="radio" name={`${id} + q`} className="option-input radio" id={`${id} + q1a`} />
-            <label htmlFor={`${id} + q1a`} className="option">{decodeHTMLEntities(answersArray[0])}</label>
-            <input type="radio" name={`${id} + q`} className="option-input radio" id={`${id} + q1b`} />
-            <label htmlFor={`${id} + q1b`} className="option">{decodeHTMLEntities(answersArray[1])}</label>
-            <input type="radio" name={`${id} + q`} className="option-input radio" id={`${id} + q1c`} />
-            <label htmlFor={`${id} + q1c`} className="option">{decodeHTMLEntities(answersArray[2])}</label>
-            <input type="radio" name={`${id} + q`} className="option-input radio" id={`${id} + q1d`} />
-            <label htmlFor={`${id} + q1d`} className="option">{decodeHTMLEntities(answersArray[3])}</label>
+            <div className="optionsContainer">
+                {answerOptions}
+            </div>
             <div className="line"></div>
         </div>
     )
