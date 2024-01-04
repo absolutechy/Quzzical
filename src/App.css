@@ -133,13 +133,16 @@ form {
   text-overflow: ellipsis; /* This will add an ellipsis (...) at the end of the overflowing text */
 }
 
-.correct{
+.option-input.radio:checked + .option.correct {
   background-color: green;
+  color: white;
 }
 
-.incorrect{
+.option-input.radio:checked + .option.incorrect {
   background-color: red;
+  color: white;
 }
+
 
 .option-input.radio:checked + .option {
   background-color: #D6DBF5;

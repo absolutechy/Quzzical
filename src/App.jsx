@@ -36,18 +36,16 @@ function App() {
             key={item.question}
             question={item.question}
             options={optionsArray}
-            correctAnswer={item.correct_answers}
+            correctAnswer={item.correct_answer}
             handleOptionChange={handleOptionChange}
             checkAnswer={checkAnswer}
         />
     })
 
-    console.log(correctAnswers) 
-    console.log(selectedAnswers)
-
     const handleClick = (event) => {
         event.preventDefault()
         setCheckAnswer(true)
+        console.log("clicked")
     }
 
     return (

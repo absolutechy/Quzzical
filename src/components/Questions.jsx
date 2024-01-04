@@ -29,13 +29,15 @@ function Questions(props) {
         setSelectedOption(event.target.value) // Update the selected option when an option is selected
         props.handleOptionChange(event.target.value) // Pass the selected option back to the parent component
     }
+    console.log('Correct Answer:', props.correctAnswer);
+    console.log('Selected Option:', selectedOption);
 
     const answerOptions = shuffledAnswers.map((answer, index) => (
         <div key={index}>
             <input 
                 type="radio" 
                 name={`${id}q`} 
-                className="option-input radio" 
+                className="option-input radio correct" 
                 id={`${id} + q1${String.fromCharCode(97 + index)}`}
                 value={answer}
                 checked={selectedOption === answer} // Set the checked attribute based on the selected option
@@ -43,7 +45,8 @@ function Questions(props) {
             />
             <label 
                 htmlFor={`${id} + q1${String.fromCharCode(97 + index)}`} 
-                className={`option ${props.checkAnswer && selectedOption === answer ? (answer === props.correctAnswer ?  'correct' : 'incorrect') : ''}`}
+                className={`option ${props.checkAnswer ? (answer === props.correctAnswer ? 'correct' : (selectedOption === answer && answer !== props.correctAnswer ? 'incorrect' : '')) : ''}`}
+
             >
                 {decodeHTMLEntities(answer)}
             </label>
