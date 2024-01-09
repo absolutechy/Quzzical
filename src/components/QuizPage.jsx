@@ -29,7 +29,7 @@ function QuizPage() {
       );
     });
   return (
-    <div className="quiz-container">{quiz && <form>{quizArray}</form>}</div>
+    <div className='quiz-container'>{quiz && <form>{quizArray}</form>}</div>
   );
 }
 
