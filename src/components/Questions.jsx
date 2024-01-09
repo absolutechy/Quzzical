@@ -29,8 +29,6 @@ function Questions(props) {
         setSelectedOption(event.target.value) // Update the selected option when an option is selected
         props.handleOptionChange(event.target.value) // Pass the selected option back to the parent component
     }
-    console.log('Correct Answer:', props.correctAnswer);
-    console.log('Selected Option:', selectedOption);
 
     const answerOptions = shuffledAnswers.map((answer, index) => (
         <div key={index}>
@@ -45,7 +43,13 @@ function Questions(props) {
             />
             <label 
                 htmlFor={`${id} + q1${String.fromCharCode(97 + index)}`} 
-                className={`option ${props.checkAnswer ? (answer === props.correctAnswer ? 'correct' : (selectedOption === answer && answer !== props.correctAnswer ? 'incorrect' : '')) : ''}`}
+                className={`
+                            option 
+                            ${selectedOption === answer && 'selected'}
+                            ${props.correctAnswer === answer && props.checkAnswer && 'correct'}
+                            ${props.correctAnswer !== answer && props.checkAnswer && selectedOption === answer && 'incorrect'}
+                            ${props.checkAnswer && 'all-options'} 
+                            `}
 
             >
                 {decodeHTMLEntities(answer)}

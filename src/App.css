@@ -1,10 +1,16 @@
+:root {
+  --bg-color: #F5F7FB;
+  --text-color: #293264;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
+  color: var(--text-color);
 }
 
 body{
-  background-color: #F5F7FB;
+  background-color: var(--bg-color);
   font-family: 'karla', sans-serif;
 }
 
@@ -44,17 +50,17 @@ body{
 }
 
 h1 {
- color: #4D5B9E; 
+ color: var(--text-color); 
  margin-bottom: 10px; 
 }
 
 p {
- color:#4D5B9E; 
+ color:var(--text-color); 
  margin-bottom: 30px; 
 }
 
 button {
- background-color:#4D5B9E; 
+ background-color:var(--text-color); 
  color:white; 
  padding:10px 20px; 
  border:none; 
@@ -125,15 +131,36 @@ form {
   text-align: center;
   padding: 5px 10px; /* Added horizontal padding to handle longer text */
   margin-right: 20px;
-  border: 1px solid #4D5B9E;
+  border: 1px solid var(--text-color);
   border-radius: 12px;
+  font-weight: 500;
   cursor: pointer;
   white-space: nowrap; /* This will prevent the text from breaking into multiple lines */
   overflow: hidden; /* This will hide the text that exceeds the maximum width */
   text-overflow: ellipsis; /* This will add an ellipsis (...) at the end of the overflowing text */
 }
 
-.option-input.radio:checked + .option.correct {
+.all-options {
+  opacity: 0.5;
+}
+
+.selected{
+  background-color: #D6DBF5;
+  border: none;
+}
+
+.correct {
+  background-color: #94D7A2;
+  opacity: 1;
+  border: none;
+}
+
+.incorrect {
+  background-color: #F8BCBC;
+  border: none;
+}
+
+/* .option-input.radio:checked + .option.correct {
   background-color: green;
   color: white;
 }
@@ -147,7 +174,8 @@ form {
 .option-input.radio:checked + .option {
   background-color: #D6DBF5;
   border: none;
-}
+} */
+
 
 .line{
   /* height: 10px; */

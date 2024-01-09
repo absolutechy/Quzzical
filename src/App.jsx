@@ -4,11 +4,11 @@ import StartingPage from './components/StartingPage.jsx'
 import './App.css'
 
 function App() {
+    const [game, setGame] = useState(false)
     const [quiz, setQuiz] = useState(null)
     const [start, setStart] = useState(false) 
     const [correctAnswers, setCorrectAnswers] = useState([]) 
     const [selectedAnswers, setSelectedAnswers] = useState([])
-    const [checkAnswer, setCheckAnswer] = useState(false)
 
     useEffect(() => {
         if(start) {
@@ -38,21 +38,31 @@ function App() {
             options={optionsArray}
             correctAnswer={item.correct_answer}
             handleOptionChange={handleOptionChange}
-            checkAnswer={checkAnswer}
+            checkAnswer={game}
         />
     })
 
+    const points = () => {
+        const numCorrect = selectedAnswers.filter(answer => correctAnswers.includes(answer)).length
+        return numCorrect
+    }
+    
     const handleClick = (event) => {
         event.preventDefault()
-        setCheckAnswer(true)
-        console.log("clicked")
+        if(!game) {
+            setGame(true)
+        } else {
+            setGame(false)
+            location.reload()
+        }
     }
 
     return (
         <div className="quiz-container">
             {quiz ? (<form>
                         {quizArray}
-                        <button onClick={handleClick}>Check Answers</button>
+                        {game && <p>{`You scored ${points()}/5 correct answers`}</p>}
+                        <button onClick={handleClick}>{game ? 'Play Again' : 'Check Answers'}</button>
                     </form> )
             : 
             <StartingPage startQuiz = {startQuiz}/>}
