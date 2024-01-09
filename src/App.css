@@ -1,8 +1,26 @@
 :root {
-  --bg-color: #F5F7FB;
+  --bg-color: #f5f7fb;
   --dark-blue: #293264;
-  --light-blue: #D6DBF5;
-  --medium-blue: #4D5B9E;
+  --light-blue: #d6dbf5;
+  --medium-blue: #4d5b9e;
+}
+
+/* blob styles */
+.top-blob,
+.bottom-blob {
+  width: 350px;
+  position: fixed;
+  z-index: -1;
+  opacity: 0.75;
+}
+.top-blob {
+  top: 0;
+  right: 0;
+}
+
+.bottom-blob {
+  bottom: 0;
+  left: 0;
 }
 
 * {
@@ -11,128 +29,132 @@
   color: var(--dark-blue);
 }
 
-body{
-  background-color: var(--bg-color);
+/* general styles */
+body {
   font-family: 'karla', sans-serif;
 }
 
-h1 {
- margin-bottom: 10px; 
+/* style to hide inputs */
+input[type='radio'] {
+  display: none;
 }
 
-p {
- margin-bottom: 30px;
- font-weight: 400; 
- font-size: 1.1rem;
+.btn {
+  background-color: var(--medium-blue);
+  color: white;
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 25px;
+  font-weight: inherit;
 }
 
-button {
- background-color:var(--medium-blue); 
- color:white; 
- width: 200px;
- height: 60px;
- border:none; 
- border-radius:15px;  
- cursor: pointer;
- text-align: center;
- font-family: 'Karla', sans-serif;
- font-size: 1.4rem;
- font-weight: 500;
- line-height: normal;
-}
+/* start page styles */
 
-/* Quiz Container Styles */
-
-form {
-  margin-top: 10em;
-}
-
-.quiz-container {
-  height: 100vh;
-  width: 100vw;
+.start-page {
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 25px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+.start-page h1 {
+  font-size: 75px;
+}
+.start-page h2 {
+  font-size: 45px;
 }
 
-
-.top-blob {
-  flex-shrink: 0;
-  position: fixed;
-  top: 0;
-  right: 0;
+/* quiz page styles */
+.quiz-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+.score {
+  font-size: 25px;
+  text-align: center;
+}
+/* question card page component styles */
+.question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 45px;
+  border-bottom: 1px solid var(--dark-blue);
 }
 
-.bottom-blob {
-  flex-shrink: 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
-
-
-#question1 {
-  width: 500px;
-}
-
-.question {
-  font-size: 1.4rem;
+.question-card--title {
+  font-size: 25px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-.option-input.radio {
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-}
-
-.optionsContainer {
+.question-card--answer-options {
+  font-size: 18px;
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.question-card--answer--options__option {
+  background-color: transparent;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
   align-items: center;
-}
-
-.option {
-  display: inline-block;
-  max-width: 200px; 
-  width: auto; 
-  text-align: center;
-  padding: 5px 10px; 
-  margin-right: 20px;
-  border: 1px solid var(--dark-blue);
-  border-radius: 12px;
-  font-weight: 500;
+  border: 1px solid rgb(123, 123, 242);
+  border-radius: 10px;
+  font-size: inherit;
+  min-width: 100px;
   cursor: pointer;
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
 }
 
-.all-options {
-  opacity: 0.5;
-}
-
-.selected{
+/* Selected option styles */
+.selected {
   background-color: var(--light-blue);
   border: none;
 }
 
 .correct {
-  background-color: #94D7A2;
+  background-color: #94d7a2;
   opacity: 1;
   border: none;
 }
 
 .incorrect {
-  background-color: #F8BCBC;
+  background-color: #f8bcbc;
   border: none;
 }
+/* media queries */
+@media (max-width: 768px) {
+  .start-page {
+    /* spread the items on the start page out a bit */
+    justify-content: space-evenly;
+  }
 
-.line{
-  /* height: 10px; */
-  margin-top: 1.5em;
-  margin-bottom: 1.5em ;
-  width: 600px;
-  border-bottom: 2px solid #DBDEF0;
+  /* have question selectors go to columns */
+  .question-card--answer-options {
+    flex-direction: column;
+    gap: 15px;
+  }
+  /* remove "blobs" */
+  .top-blob,
+  .bottom-blob {
+    display: none;
+  }
 }
