@@ -1,12 +1,14 @@
 :root {
   --bg-color: #F5F7FB;
-  --text-color: #293264;
+  --dark-blue: #293264;
+  --light-blue: #D6DBF5;
+  --medium-blue: #4D5B9E;
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
-  color: var(--text-color);
+  color: var(--dark-blue);
 }
 
 body{
@@ -14,91 +16,58 @@ body{
   font-family: 'karla', sans-serif;
 }
 
-.container {
-  /* background-color: #E0F7FA; */
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;   
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  background: url('./assets/blob5.svg') no-repeat right top;
-  width: 200px; /* adjust as needed */
-  height: 200px; /* adjust as needed */
-}
-.container::after {
-  content: "";
-  position: absolute;
-  background: url('./assets/blobs.svg') no-repeat bottom left;
-  width: 100px; /* adjust as needed */
-  height: 100px; /* adjust as needed */
-}
-
-.container::before {
-  top: 0;
-  right: 0;
-}
-
-.container::after {
-  bottom: 0;
-  left: 0;
-}
-
 h1 {
- color: var(--text-color); 
  margin-bottom: 10px; 
 }
 
 p {
- color:var(--text-color); 
- margin-bottom: 30px; 
+ margin-bottom: 30px;
+ font-weight: 400; 
+ font-size: 1.1rem;
 }
 
 button {
- background-color:var(--text-color); 
+ background-color:var(--medium-blue); 
  color:white; 
- padding:10px 20px; 
+ width: 200px;
+ height: 60px;
  border:none; 
- border-radius:5px;  
+ border-radius:15px;  
  cursor: pointer;
+ text-align: center;
+ font-family: 'Karla', sans-serif;
+ font-size: 1.4rem;
+ font-weight: 500;
+ line-height: normal;
 }
 
 /* Quiz Container Styles */
 
 form {
-  margin-top: 4em;
+  margin-top: 10em;
 }
 
 .quiz-container {
-  /* background-color: #E0F7FA; */
   height: 100vh;
-  padding-left: 10em;
+  width: 100vw;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative;   
+  flex-wrap: wrap;
 }
 
-.quiz-container::before {
-  content: "";
-  position: absolute;
-  background: url('./assets/blob5.svg') no-repeat right top;
-  width: 200px; /* adjust as needed */
-  height: 200px; /* adjust as needed */
+
+.top-blob {
+  flex-shrink: 0;
+  position: fixed;
   top: 0;
   right: 0;
 }
 
-.quiz-container::after {
-  content: "";
-  position: absolute;
-  background: url('./assets/blobs.svg') no-repeat ;
-  width: 100px; /* adjust as needed */
-  height: 100px; /* adjust as needed */
+.bottom-blob {
+  flex-shrink: 0;
+  position: fixed;
   bottom: 0;
   left: 0;
 }
@@ -126,18 +95,18 @@ form {
 
 .option {
   display: inline-block;
-  max-width: 200px; /* Set the maximum width as per your requirement */
-  width: auto; /* This will make the width dynamic */
+  max-width: 200px; 
+  width: auto; 
   text-align: center;
-  padding: 5px 10px; /* Added horizontal padding to handle longer text */
+  padding: 5px 10px; 
   margin-right: 20px;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--dark-blue);
   border-radius: 12px;
   font-weight: 500;
   cursor: pointer;
-  white-space: nowrap; /* This will prevent the text from breaking into multiple lines */
-  overflow: hidden; /* This will hide the text that exceeds the maximum width */
-  text-overflow: ellipsis; /* This will add an ellipsis (...) at the end of the overflowing text */
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .all-options {
@@ -145,7 +114,7 @@ form {
 }
 
 .selected{
-  background-color: #D6DBF5;
+  background-color: var(--light-blue);
   border: none;
 }
 
@@ -159,23 +128,6 @@ form {
   background-color: #F8BCBC;
   border: none;
 }
-
-/* .option-input.radio:checked + .option.correct {
-  background-color: green;
-  color: white;
-}
-
-.option-input.radio:checked + .option.incorrect {
-  background-color: red;
-  color: white;
-}
-
-
-.option-input.radio:checked + .option {
-  background-color: #D6DBF5;
-  border: none;
-} */
-
 
 .line{
   /* height: 10px; */

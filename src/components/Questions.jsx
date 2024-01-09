@@ -11,7 +11,6 @@ function shuffleArray(array) {
 
 function Questions(props) {
     const id = useId()
-    // const answersArray = shuffleArray([...props.options])
     const [shuffledAnswers, setShuffledAnswers] = useState([])
     const [selectedOption, setSelectedOption] = useState(null)
 
@@ -26,8 +25,8 @@ function Questions(props) {
     }
 
     const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value) // Update the selected option when an option is selected
-        props.handleOptionChange(event.target.value) // Pass the selected option back to the parent component
+        setSelectedOption(event.target.value) 
+        props.handleOptionChange(event.target.value) 
     }
 
     const answerOptions = shuffledAnswers.map((answer, index) => (
@@ -38,8 +37,8 @@ function Questions(props) {
                 className="option-input radio correct" 
                 id={`${id} + q1${String.fromCharCode(97 + index)}`}
                 value={answer}
-                checked={selectedOption === answer} // Set the checked attribute based on the selected option
-                onChange={handleOptionChange} // Use onChange to update the selected option
+                checked={selectedOption === answer} 
+                onChange={handleOptionChange} 
             />
             <label 
                 htmlFor={`${id} + q1${String.fromCharCode(97 + index)}`} 
